@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0b0c">
+  <meta name="description" content="Portfólio de Guilherme Simi Lopes — suporte técnico, implantação e integração de sistemas.">
+  <title>Guilherme Simi Lopes — Tecnologia & Integração</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0b0c;
+      --surface: #121214;
+      --card: #161618;
+      --border: rgba(255, 255, 255, .09);
+      --text: #ededed;
+      --muted: #a1a1aa;
+      --subtle: #686870;
+      --accent: #e50914;
+      --accent-soft: rgba(229, 9, 20, .14);
+      --font: "Manrope", sans-serif;
+      --mono: "DM Mono", monospace;
+      --container: 1160px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    ::selection { background: rgba(229, 9, 20, .35); color: white; }
+    .container { width: min(var(--container), calc(100% - 48px)); margin-inline: auto; }
+    .section { padding: 112px 0; }
+    .section-kicker, .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #f2676d;
+      font: 500 11px/1.4 var(--mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .section-kicker::before, .eyebrow::before {
+      width: 20px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+    .section-heading {
+      max-width: 680px;
+      margin: 17px 0 0;
+      font-size: clamp(34px, 5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -.055em;
+      line-height: 1.12;
+    }
+    .section-heading span { color: var(--muted); }
+    .section-intro { max-width: 590px; margin: 18px 0 0; color: var(--muted); font-size: 15px; line-height: 1.85; }
+    .accent { color: var(--accent); }
+    .mono { font-family: var(--mono); }
+
+    /* Header */
+    .site-header {
+      position: fixed;
+      z-index: 20;
+      inset: 0 0 auto;
+      height: 76px;
+      border-bottom: 1px solid transparent;
+      background: rgba(11, 11, 12, .72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: border-color .25s, background .25s;
+    }
+    .site-header.scrolled { border-color: var(--border); background: rgba(11, 11, 12, .9); }
+    .header-inner { display: flex; height: 100%; align-items: center; justify-content: space-between; }
+    .brand { font-size: 20px; font-weight: 800; letter-spacing: -.06em; }
+    .brand-dot { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 29px; }
+    .nav-links a { color: #a6a6ad; font-size: 12px; font-weight: 600; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .header-contact {
+      padding: 10px 15px;
+      border: 1px solid rgba(229, 9, 20, .6);
+      border-radius: 5px;
+      color: #f27278;
+      font: 11px var(--mono);
+      transition: color .2s, background .2s, box-shadow .2s;
+    }
+    .header-contact:hover { background: var(--accent); color: white; box-shadow: 0 0 22px rgba(229, 9, 20, .22); }
+    .menu-toggle { display: none; width: 42px; height: 42px; padding: 10px; border: 1px solid var(--border); border-radius: 5px; background: transparent; color: var(--text); }
+    .menu-toggle span { display: block; width: 18px; height: 1px; margin: 5px auto; background: currentColor; transition: transform .2s; }
+    .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(3px) rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3px) rotate(-45deg); }
+
+    /* Hero */
+    .hero { position: relative; display: flex; min-height: 760px; align-items: center; overflow: hidden; padding: 145px 0 92px; }
+    .hero::before {
+      position: absolute;
+      top: 6%;
+      right: -14%;
+      width: 720px;
+      height: 720px;
+      border: 1px solid rgba(255, 255, 255, .035);
+      border-radius: 50%;
+      box-shadow: 0 0 0 85px rgba(255, 255, 255, .012), 0 0 0 170px rgba(255, 255, 255, .009);
+      content: "";
+      pointer-events: none;
+    }
+    .hero::after { position: absolute; top: 20%; right: 8%; width: 400px; height: 400px; border-radius: 50%; background: rgba(229, 9, 20, .09); filter: blur(110px); content: ""; pointer-events: none; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 64px; }
+    .availability { display: inline-flex; align-items: center; gap: 9px; padding: 9px 12px; border: 1px solid rgba(255, 255, 255, .1); border-radius: 4px; background: rgba(255, 255, 255, .025); color: #c5c5ca; font: 10px var(--mono); letter-spacing: .015em; }
+    .availability-dot { width: 7px; height: 7px; border-radius: 50%; background: #44cf87; box-shadow: 0 0 12px rgba(68, 207, 135, .7); }
+    .hero h1 { max-width: 730px; margin: 28px 0 0; font-size: clamp(46px, 7vw, 82px); font-weight: 700; letter-spacing: -.075em; line-height: 1.04; }
+    .hero h1 .highlight { color: #f04a52; }
+    .hero-copy { max-width: 575px; margin: 24px 0 0; color: #a1a1aa; font-size: 15px; line-height: 1.9; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 33px; }
+    .button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; gap: 10px; padding: 0 18px; border: 1px solid transparent; border-radius: 4px; font-size: 12px; font-weight: 700; transition: transform .2s, background .2s, border-color .2s, box-shadow .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--accent); color: white; box-shadow: 0 7px 25px rgba(229, 9, 20, .17); }
+    .button-primary:hover { background: #f21b26; box-shadow: 0 9px 30px rgba(229, 9, 20, .3); }
+    .button-secondary { border-color: rgba(255, 255, 255, .16); background: rgba(255, 255, 255, .02); color: #dddde1; }
+    .button-secondary:hover { border-color: rgba(255, 255, 255, .35); background: rgba(255, 255, 255, .06); }
+    .hero-visual { position: relative; justify-self: end; width: min(100%, 380px); }
+    .code-window { overflow: hidden; border: 1px solid rgba(255, 255, 255, .11); border-radius: 8px; background: rgba(18, 18, 20, .86); box-shadow: 0 35px 90px rgba(0, 0, 0, .45); transform: perspective(1000px) rotateY(-5deg) rotateX(2deg); }
+    .window-top { display: flex; height: 46px; align-items: center; gap: 6px; padding: 0 15px; border-bottom: 1px solid rgba(255, 255, 255, .07); }
+    .window-dot { width: 7px; height: 7px; border-radius: 50%; background: #49494e; }
+    .window-dot:first-child { background: #e65b61; }
+    .window-title { margin-left: auto; color: #696970; font: 9px var(--mono); }
+    .code-content { padding: 25px 22px 28px; color: #b4b4bc; font: 11px/2.1 var(--mono); }
+    .code-content .line-number { display: inline-block; width: 27px; color: #515158; user-select: none; }
+    .code-content .key { color: #f17a80; }
+    .code-content .string { color: #a6d69c; }
+    .code-content .value { color: #87b8ee; }
+    .code-content .comment { color: #66666d; }
+    .code-status { display: flex; align-items: center; justify-content: space-between; margin-top: 25px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .07); color: #7c7c83; font: 9px var(--mono); }
+    .status-ok { color: #7acb8c; }
+    .hero-index { position: absolute; right: 0; bottom: -52px; color: rgba(255, 255, 255, .17); font: 10px var(--mono); letter-spacing: .12em; }
+    .scroll-note { position: absolute; bottom: 28px; left: max(24px, calc((100vw - var(--container)) / 2)); display: flex; align-items: center; gap: 10px; color: #717178; font: 9px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .scroll-note::before { width: 24px; height: 1px; background: var(--accent); content: ""; }
+
+    /* About */
+    .about { border-top: 1px solid rgba(255, 255, 255, .04); background: #0e0e10; }
+    .about-grid { display: grid; grid-template-columns: .82fr 1.18fr; align-items: center; gap: 92px; margin-top: 52px; }
+    .portrait-wrap { position: relative; width: min(100%, 360px); margin: 0 auto; }
+    .portrait-frame { position: relative; aspect-ratio: 4 / 4.7; overflow: hidden; border: 1px solid rgba(255, 255, 255, .1); border-radius: 7px; background: radial-gradient(ellipse at 50% 32%, #342326 0, #171416 37%, #111113 73%); }
+    .portrait-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 38%; }
+    .portrait-frame::before { position: absolute; inset: 0; background: linear-gradient(145deg, transparent 35%, rgba(229, 9, 20, .13)); content: ""; }
+    .portrait-frame::after { position: absolute; right: -55px; bottom: -80px; width: 220px; height: 220px; border: 1px solid rgba(229, 9, 20, .25); border-radius: 50%; box-shadow: 0 0 0 30px rgba(229, 9, 20, .04), 0 0 0 60px rgba(229, 9, 20, .025); content: ""; }
+    .portrait-monogram { position: absolute; inset: 0; display: grid; place-items: center; color: rgba(255, 255, 255, .9); font-size: clamp(100px, 17vw, 170px); font-weight: 800; letter-spacing: -.12em; text-shadow: 0 15px 50px rgba(0, 0, 0, .5); }
+    .portrait-caption { position: absolute; z-index: 1; right: 15px; bottom: 15px; left: 15px; display: flex; align-items: center; justify-content: space-between; padding: 12px; border: 1px solid rgba(255, 255, 255, .11); border-radius: 4px; background: rgba(11, 11, 12, .72); backdrop-filter: blur(10px); color: #c8c8cd; font: 9px var(--mono); }
+    .portrait-caption span:last-child { color: #f26c73; }
+    .about-copy h3 { margin: 0 0 18px; font-size: clamp(24px, 3vw, 34px); letter-spacing: -.05em; line-height: 1.3; }
+    .about-copy p { margin: 0 0 14px; color: var(--muted); font-size: 13px; line-height: 1.9; }
+    .about-copy strong { color: #e6e6e9; font-weight: 700; }
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 25px; }
+    .skill { padding: 8px 10px; border: 1px solid rgba(255, 255, 255, .09); border-radius: 3px; background: rgba(255, 255, 255, .025); color: #b8b8bf; font: 9px var(--mono); transition: border-color .2s, color .2s; }
+    .skill:hover { border-color: rgba(229, 9, 20, .5); color: white; }
+
+    /* Experience */
+    .experience-grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: 80px; margin-top: 54px; }
+    .experience-aside { position: sticky; top: 112px; align-self: start; }
+    .experience-aside p { max-width: 280px; margin: 18px 0 0; color: var(--muted); font-size: 13px; line-height: 1.85; }
+    .experience-aside .aside-note { display: inline-flex; gap: 9px; align-items: center; margin-top: 28px; color: #86868d; font: 9px var(--mono); }
+    .aside-note::before { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); content: ""; }
+    .timeline { position: relative; }
+    .timeline::before { position: absolute; top: 7px; bottom: 12px; left: 3px; width: 1px; background: linear-gradient(var(--accent), rgba(255, 255, 255, .08) 75%); content: ""; }
+    .timeline-item { position: relative; padding: 0 0 39px 30px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before { position: absolute; top: 5px; left: 0; width: 7px; height: 7px; border: 1px solid #f05a62; border-radius: 50%; background: var(--bg); box-shadow: 0 0 12px rgba(229, 9, 20, .3); content: ""; }
+    .timeline-date { color: #e36a70; font: 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .timeline-item h3 { margin: 9px 0 5px; font-size: 17px; font-weight: 700; letter-spacing: -.03em; }
+    .timeline-company { color: #c0c0c6; font-size: 11px; font-weight: 700; }
+    .timeline-item p { max-width: 600px; margin: 11px 0 0; color: #8f8f97; font-size: 12px; line-height: 1.85; }
+
+    /* Projects */
+    .projects { background: #0e0e10; }
+    .projects-top { display: flex; align-items: end; justify-content: space-between; gap: 25px; }
+    .projects-count { padding-bottom: 7px; color: #77777f; font: 10px var(--mono); }
+    .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 45px; }
+    .project-card { position: relative; display: flex; min-height: 365px; flex-direction: column; overflow: hidden; padding: 26px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); transition: border-color .25s, transform .25s, box-shadow .25s; }
+    .project-card::before { position: absolute; top: -100px; right: -100px; width: 240px; height: 240px; border-radius: 50%; background: rgba(229, 9, 20, .08); filter: blur(65px); content: ""; opacity: 0; transition: opacity .3s; }
+    .project-card:hover { transform: translateY(-4px); border-color: rgba(229, 9, 20, .42); box-shadow: 0 18px 50px rgba(0, 0, 0, .25), 0 0 35px rgba(229, 9, 20, .07); }
+    .project-card:hover::before { opacity: 1; }
+    .project-topline, .project-title, .project-description, .project-bottom { position: relative; z-index: 1; }
+    .project-topline { display: flex; align-items: center; justify-content: space-between; color: #8a8a91; font: 9px var(--mono); }
+    .project-icon { display: grid; width: 39px; height: 39px; place-items: center; border: 1px solid rgba(229, 9, 20, .25); border-radius: 5px; background: rgba(229, 9, 20, .07); color: #ef646b; font-size: 17px; }
+    .project-number { font: 10px var(--mono); }
+    .project-title { margin: 36px 0 10px; font-size: 23px; letter-spacing: -.045em; }
+    .project-description { max-width: 430px; margin: 0; color: #9c9ca4; font-size: 12px; line-height: 1.85; }
+    .project-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: auto; padding-top: 30px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .project-tag { color: #a0a0a8; font: 9px var(--mono); }
+    .project-tag + .project-tag::before { margin-right: 7px; color: #d5535a; content: "/"; }
+    .project-arrow { display: grid; width: 31px; height: 31px; place-items: center; border: 1px solid var(--border); border-radius: 50%; color: #c0c0c6; }
+    .project-note { margin-top: 17px; color: #66666e; font: 9px var(--mono); }
+
+    /* Community */
+    .community-intro { display: flex; align-items: end; justify-content: space-between; gap: 24px; }
+    .community-intro .section-intro { max-width: 360px; margin: 0 0 5px; }
+    .community-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 42px; }
+    .community-card { position: relative; min-height: 330px; overflow: hidden; border: 1px solid var(--border); border-radius: 6px; background: #191719; }
+    .community-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55; filter: saturate(.68); transition: transform .55s, opacity .3s, filter .3s; }
+    .community-card:hover img { transform: scale(1.045); opacity: .72; filter: saturate(.9); }
+    .community-card::after { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 8, 9, .05) 5%, rgba(8, 8, 9, .32) 40%, rgba(8, 8, 9, .94) 100%); content: ""; }
+    .community-content { position: absolute; z-index: 1; right: 24px; bottom: 23px; left: 24px; }
+    .community-label { color: #f0787d; font: 9px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .community-content h3 { margin: 9px 0 8px; font-size: 20px; letter-spacing: -.04em; }
+    .community-content p { max-width: 500px; margin: 0; color: #c0c0c5; font-size: 11px; line-height: 1.75; }
+    .community-certificate-link { display: inline-flex; margin-top: 12px; color: #f28a8f; font: 9px var(--mono); transition: color .2s; }
+    .community-certificate-link:hover { color: white; }
+
+    /* Education */
+    .education { border-top: 1px solid rgba(255, 255, 255, .04); background: #0e0e10; }
+    .education-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 43px; }
+    .education-card { padding: 24px; border: 1px solid var(--border); border-radius: 5px; background: var(--card); }
+    .education-card h3 { margin: 0 0 20px; color: #e8e8eb; font-size: 14px; letter-spacing: -.02em; }
+    .education-entry { display: flex; justify-content: space-between; gap: 20px; padding: 15px 0; border-top: 1px solid rgba(255, 255, 255, .07); }
+    .education-entry:first-of-type { border-top: 0; }
+    .education-entry strong { display: block; color: #d0d0d5; font-size: 11px; line-height: 1.6; }
+    .education-entry span { display: block; margin-top: 4px; color: #85858d; font-size: 10px; line-height: 1.6; }
+    .education-entry time { flex: none; color: #e56a71; font: 9px var(--mono); white-space: nowrap; }
+    .recognition-link { display: inline-flex; margin-top: 11px; color: #f0787d; font: 9px var(--mono); }
+    .recognition-link:hover { color: white; }
+    .education-entry .recognition-link { flex: none; align-self: center; margin-top: 0; white-space: nowrap; }
+
+    /* Contact & footer */
+    .contact { position: relative; overflow: hidden; }
+    .contact::before { position: absolute; top: 20%; left: -240px; width: 430px; height: 430px; border-radius: 50%; background: rgba(229, 9, 20, .07); filter: blur(120px); content: ""; pointer-events: none; }
+    .contact-grid { position: relative; max-width: 760px; margin-top: 45px; }
+    .contact-copy h3 { max-width: 650px; margin: 0; font-size: clamp(30px, 4.5vw, 49px); letter-spacing: -.06em; line-height: 1.16; }
+    .contact-copy h3 span { color: #f04a52; }
+    .contact-copy > p { max-width: 560px; margin: 19px 0 0; color: var(--muted); font-size: 13px; line-height: 1.85; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .contact-link { padding: 10px 12px; border: 1px solid var(--border); border-radius: 4px; color: #b5b5bc; font: 9px var(--mono); transition: border-color .2s, color .2s; }
+    .contact-link:hover { border-color: rgba(229, 9, 20, .5); color: white; }
+    .site-footer { padding: 23px 0; border-top: 1px solid rgba(255, 255, 255, .07); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-copy { color: #696970; font: 9px var(--mono); }
+    .footer-top { color: #aaaab1; font: 9px var(--mono); transition: color .2s; }
+    .footer-top:hover { color: white; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: .08s; }
+    .delay-2 { transition-delay: .16s; }
+    .delay-3 { transition-delay: .24s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 900px) {
+      .nav-links { gap: 17px; }
+      .nav-links a { font-size: 11px; }
+      .hero-grid { grid-template-columns: 1fr .75fr; gap: 28px; }
+      .hero h1 { font-size: clamp(48px, 7vw, 68px); }
+      .about-grid { gap: 55px; }
+      .experience-grid { grid-template-columns: .6fr 1.4fr; gap: 45px; }
+      .community-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 700px) {
+      html { scroll-padding-top: 72px; }
+      .container { width: min(var(--container), calc(100% - 36px)); }
+      .section { padding: 78px 0; }
+      .site-header { height: 66px; }
+      .menu-toggle { display: block; margin-left: auto; }
+      .header-contact { margin-left: 10px; padding: 9px 11px; }
+      .nav-links { position: fixed; inset: 66px 0 auto; display: flex; align-items: stretch; flex-direction: column; gap: 0; padding: 12px 18px 20px; border-bottom: 1px solid var(--border); background: rgba(11, 11, 12, .97); opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity .2s, transform .2s; }
+      .nav-links.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+      .nav-links a { padding: 14px 4px; border-bottom: 1px solid rgba(255, 255, 255, .06); font-size: 13px; }
+      .nav-links a:last-child { border-bottom: 0; }
+      .hero { min-height: auto; padding: 132px 0 85px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 42px; }
+      .hero h1 { max-width: 620px; font-size: clamp(46px, 12vw, 68px); }
+      .hero-copy { font-size: 13px; }
+      .hero-visual { justify-self: start; width: min(100%, 420px); }
+      .code-window { transform: none; }
+      .hero-index { right: 4px; bottom: -31px; }
+      .scroll-note { bottom: 25px; }
+      .about-grid { grid-template-columns: 1fr; gap: 42px; }
+      .portrait-wrap { width: min(78%, 330px); }
+      .about-copy h3 { font-size: 28px; }
+      .experience-grid { grid-template-columns: 1fr; gap: 36px; }
+      .experience-aside { position: static; }
+      .experience-aside p { max-width: 520px; }
+      .projects-top, .community-intro { align-items: start; flex-direction: column; }
+      .projects-count { padding: 0; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project-card { min-height: 330px; }
+      .community-grid { grid-template-columns: 1fr; }
+      .community-card { min-height: 290px; }
+      .education-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 420px) {
+      .container { width: calc(100% - 30px); }
+      .brand { font-size: 18px; }
+      .header-contact { font-size: 9px; }
+      .availability { font-size: 8px; }
+      .hero-actions .button { flex: 1; padding: 0 12px; font-size: 10px; }
+      .project-card { padding: 21px; }
+      .education-card { padding: 19px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: white; color: #171717; }
+      .site-header, .hero-visual, .hero-actions, .scroll-note, .contact-links, .site-footer { display: none !important; }
+      .hero { min-height: auto; padding: 35px 0 20px; }
+      .hero::before, .hero::after, .contact::before { display: none; }
+      .hero-grid, .about-grid, .experience-grid, .education-grid { display: block; }
+      .section { padding: 28px 0; border-top: 1px solid #ddd; background: white; }
+      .about-grid, .experience-grid { margin-top: 20px; }
+      .portrait-wrap { display: none; }
+      .section-heading, .hero h1, .contact-copy h3, .about-copy h3, .timeline-item h3 { color: #171717; }
+      .section-intro, .hero-copy, .about-copy p, .timeline-item p, .experience-aside p, .education-entry span { color: #444; }
+      .timeline::before { background: #aaa; }
+      .timeline-item::before { background: #555; }
+      .timeline-item, .education-card { break-inside: avoid; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="Guilherme Simi, início">G.Simi<span class="brand-dot">.</span></a>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span>
+      </button>
+      <nav class="nav-links" id="main-nav" aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#carreira">Carreira</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#voluntariado">Voluntariado</a>
+        <a href="#formacao">Certificações</a>
+      </nav>
+      <a class="header-contact" href="#contato">[ Contato ]</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="availability reveal"><span class="availability-dot"></span> Atuando em Tecnologia <span aria-hidden="true">|</span> Disponível para novos projetos</div>
+          <h1 class="reveal delay-1">Suporte Técnico,<br>Implantação &amp;<br><span class="highlight">Integração</span> de Sistemas.</h1>
+          <p class="hero-copy reveal delay-2">Profissional com experiência em suporte técnico, implantação, integrações e testes. Atuo na análise e resolução de demandas, homologação de sistemas e melhoria de processos, com foco em qualidade e eficiência operacional.</p>
+          <div class="hero-actions reveal delay-2">
+            <a class="button button-primary" href="#projetos">Ver Projetos <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="Curriculo-Guilherme-Simi-Lopes.pdf" download>Baixar Currículo <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="hero-visual reveal delay-2" aria-label="Prévia de código e integrações">
+          <div class="code-window">
+            <div class="window-top"><span class="window-dot"></span><span class="window-dot"></span><span class="window-dot"></span><span class="window-title">integration.config</span></div>
+            <div class="code-content" aria-hidden="true">
+              <div><span class="line-number">01</span><span class="comment">// conectando soluções</span></div>
+              <div><span class="line-number">02</span><span class="key">const</span> integration = {</div>
+              <div><span class="line-number">03</span>&nbsp;&nbsp; <span class="key">systems</span>: [<span class="string">"e-commerce"</span>,</div>
+              <div><span class="line-number">04</span>&nbsp;&nbsp;&nbsp;&nbsp; <span class="string">"healthcare"</span>],</div>
+              <div><span class="line-number">05</span>&nbsp;&nbsp; <span class="key">protocol</span>: <span class="string">"REST / SOAP"</span>,</div>
+              <div><span class="line-number">06</span>&nbsp;&nbsp; <span class="key">status</span>: <span class="value">"operational"</span>,</div>
+              <div><span class="line-number">07</span>&nbsp;&nbsp; <span class="key">focus</span>: <span class="string">"people first"</span></div>
+              <div><span class="line-number">08</span>};</div>
+              <div class="code-status"><span>● ambiente estável</span><span class="status-ok">● todas as rotas ativas</span></div>
+            </div>
+          </div>
+          <span class="hero-index">01 — PERFIL</span>
+        </div>
+      </div>
+      <div class="scroll-note">Desça para explorar</div>
+    </section>
+
+    <section class="section about" id="sobre">
+      <div class="container">
+        <span class="section-kicker reveal">Sobre mim</span>
+        <h2 class="section-heading reveal delay-1">Tecnologia que aproxima<br><span>pessoas e processos.</span></h2>
+        <div class="about-grid">
+          <div class="portrait-wrap reveal" aria-label="Identidade visual de Guilherme Simi">
+            <div class="portrait-frame">
+              <img class="portrait-photo" src="img/Foto%20normal.jpeg" alt="Foto de Guilherme Simi Lopes" fetchpriority="high">
+              <div class="portrait-caption"><span>GUILHERME SIMI LOPES</span><span>TECNOLOGIA · 2026</span></div>
+            </div>
+          </div>
+          <div class="about-copy reveal delay-1">
+            <h3>Da implantação à integração, com foco em fazer funcionar.</h3>
+            <p>Estudante de <strong>Ciência da Computação</strong> na Estácio (2025–dezembro de 2028), com experiência em ambientes técnicos e atendimento a clientes e equipes internas.</p>
+            <p>Minha atuação reúne suporte técnico, implantação, integrações e testes de sistemas. Trabalho na análise e resolução de demandas, homologação de soluções e melhoria de processos operacionais.</p>
+            <div class="skills" aria-label="Competências técnicas">
+              <span class="skill">Python</span><span class="skill">JavaScript</span><span class="skill">HTML / CSS</span>
+              <span class="skill">SQL · PostgreSQL</span><span class="skill">APIs &amp; Web Services</span><span class="skill">Postman</span>
+              <span class="skill">Movidesk</span><span class="skill">AnyDesk</span><span class="skill">Git / GitHub</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="carreira">
+      <div class="container">
+        <span class="section-kicker reveal">Trajetória profissional</span>
+        <h2 class="section-heading reveal delay-1">Experiência construída<br><span>resolvendo desafios reais.</span></h2>
+        <div class="experience-grid">
+          <aside class="experience-aside reveal">
+            <p>Uma trajetória que combina atendimento, operação e tecnologia — com aprendizado contínuo em cada etapa.</p>
+            <span class="aside-note">Osasco, São Paulo · Brasil</span>
+          </aside>
+          <div class="timeline">
+            <article class="timeline-item reveal">
+              <span class="timeline-date">Ago 2026 — Atual</span>
+              <h3>Assistente de Integração e Suporte Redes II</h3>
+              <span class="timeline-company">epharma PBM Phygital</span>
+              <p>Suporte técnico de segundo nível em integrações, sistemas e processos; homologação e testes de integrações de e-commerce e softwares; análises, configurações e validações técnicas. Atuação na investigação de falhas, gestão de demandas de integração e infraestrutura, acompanhamento de prazos e SLAs e implantação de melhorias operacionais.</p>
+            </article>
+            <article class="timeline-item reveal">
+              <span class="timeline-date">Jan 2026 — Jul 2026</span>
+              <h3>Suporte Técnico e Operações</h3>
+              <span class="timeline-company">epharma PBM Phygital</span>
+              <p>Gestão de credenciais de integração, autorizadores e PDVs; apoio a processos operacionais, testes e melhorias internas; colaboração com Tecnologia e treinamento de novos colaboradores.</p>
+            </article>
+            <article class="timeline-item reveal">
+              <span class="timeline-date">Jan 2025 — Jan 2026</span>
+              <h3>Assistente de Credenciamento e Atendimento</h3>
+              <span class="timeline-company">epharma</span>
+              <p>Atendimento a clientes, análise e atualização de dados cadastrais, parametrização de sistemas, tratativa de demandas e elaboração de relatórios operacionais.</p>
+            </article>
+            <article class="timeline-item reveal">
+              <span class="timeline-date">Abr 2024 — Dez 2024</span>
+              <h3>Jovem Aprendiz — Credenciamento</h3>
+              <span class="timeline-company">epharma</span>
+              <p>Apoio às rotinas de credenciamento e atendimento, desenvolvendo organização, comunicação e conhecimento dos processos da operação.</p>
+            </article>
+            <article class="timeline-item reveal">
+              <span class="timeline-date">Fev 2023 — Fev 2024</span>
+              <h3>Estagiário — Departamento de Transportes</h3>
+              <span class="timeline-company">Prefeitura de Osasco</span>
+              <p>Suporte às atividades administrativas e aos processos do departamento, em colaboração com a equipe de transportes.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section projects" id="projetos">
+      <div class="container">
+        <div class="projects-top">
+          <div><span class="section-kicker reveal">Projetos em destaque</span><h2 class="section-heading reveal delay-1">Ideias que viram<br><span>soluções digitais.</span></h2></div>
+          <span class="projects-count reveal">02 PROJETOS SELECIONADOS</span>
+        </div>
+        <div class="project-grid">
+          <article class="project-card reveal">
+            <div class="project-topline"><span class="project-icon" aria-hidden="true">↗</span><span class="project-number">PROJETO 01</span></div>
+            <h3 class="project-title">Minha Caixinha de Investimentos</h3>
+            <p class="project-description">Aplicação para acompanhar uma caixinha de investimentos e visualizar a evolução das economias.</p>
+            <div class="project-bottom">
+              <div class="project-tags"><span class="project-tag">Projeto pessoal</span></div>
+              <a class="project-arrow" href="https://simiteste.github.io/minha-caixinha-investimentos/" target="_blank" rel="noreferrer" aria-label="Abrir Minha Caixinha de Investimentos">↗</a>
+            </div>
+          </article>
+          <article class="project-card reveal delay-1">
+            <div class="project-topline"><span class="project-icon" aria-hidden="true">⌁</span><span class="project-number">PROJETO 02</span></div>
+            <h3 class="project-title">Chamada — Jardim Califórnia</h3>
+            <p class="project-description">Sistema web responsivo para controle automatizado de chamadas e registros em tempo real, integrado a banco de dados em nuvem.</p>
+            <div class="project-bottom">
+              <div class="project-tags"><span class="project-tag">HTML5</span><span class="project-tag">JavaScript</span><span class="project-tag">Supabase</span><span class="project-tag">Render</span></div>
+              <span class="project-arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+        </div>
+        <p class="project-note">Links para repositórios e demonstrações podem ser adicionados quando disponíveis.</p>
+      </div>
+    </section>
+
+    <section class="section" id="voluntariado">
+      <div class="container">
+        <div class="community-intro">
+          <div><span class="section-kicker reveal">Engajamento &amp; voluntariado</span><h2 class="section-heading reveal delay-1">Impacto também<br><span>se constrói em comunidade.</span></h2></div>
+          <p class="section-intro reveal delay-2">A tecnologia ganha propósito quando combinada com liderança e impacto comunitário.</p>
+        </div>
+        <div class="community-grid">
+          <article class="community-card reveal">
+            <img src="img/Foto.jpg" alt="Guilherme fotografando e registrando um evento comunitário" loading="lazy">
+            <div class="community-content"><span class="community-label">Fotografia &amp; eventos</span><h3>Fotógrafo</h3><p>Registro momentos e eventos por meio da fotografia, com atenção às pessoas, aos detalhes e às histórias de cada ocasião.</p></div>
+          </article>
+          <article class="community-card reveal delay-1">
+            <img src="img/Outubro%20Rosa.jpg" alt="Participantes da 10ª Caminhada e Pedalada Rosa da epharma" loading="lazy">
+            <div class="community-content"><span class="community-label">Saúde &amp; conscientização</span><h3>Outubro Rosa</h3><p>Participação na 10ª Caminhada e Pedalada Rosa, apoiando a conscientização, a prevenção e o bem-estar da comunidade.</p><a class="community-certificate-link" href="img/Certificado%20Outubro%20Rosa.jpg" target="_blank" rel="noreferrer">Ver certificado de participação ↗</a></div>
+          </article>
+          <article class="community-card reveal delay-2">
+            <img src="img/Inverno%20solid%C3%A1rio.jpg" alt="Crianças reunidas durante uma ação do Inverno Solidário" loading="lazy">
+            <div class="community-content"><span class="community-label">Solidariedade &amp; ação</span><h3>Campanha Inverno Solidário</h3><p>Atuação ativa em campanhas de arrecadação e apoio a pessoas em situação de vulnerabilidade.</p><a class="community-certificate-link" href="img/Certificado%20Inverno%20Solid%C3%A1rio.jpg" target="_blank" rel="noreferrer">Ver certificado de reconhecimento ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section education" id="formacao">
+      <div class="container">
+        <span class="section-kicker reveal">Formação &amp; reconhecimentos</span>
+        <h2 class="section-heading reveal delay-1">Formação acadêmica,<br><span>conquistas profissionais.</span></h2>
+        <div class="education-grid">
+          <article class="education-card reveal">
+            <h3>Formação acadêmica e complementar</h3>
+            <div class="education-entry"><div><strong>Bacharelado em Ciência da Computação</strong><span>Universidade Estácio · em andamento</span></div><time>2025 — Dez 2028</time></div>
+            <div class="education-entry"><div><strong>Inteligência Artificial e Chatbots</strong><span>FIAP · Em andamento</span></div></div>
+            <div class="education-entry"><div><strong>Testes e consumo de APIs</strong><span>Postman</span></div></div>
+          </article>
+          <article class="education-card reveal delay-1">
+            <h3>Certificados e premiações</h3>
+            <div class="education-entry"><div><strong>ISO 14001:2015 — Sistema de Gestão Ambiental</strong><span>Certificado de conclusão · epharma</span></div><a class="recognition-link" href="img/Certifica%C3%A7%C3%A3o%20ISO%2014001.jpg" target="_blank" rel="noreferrer">Ver certificado ↗</a></div>
+            <div class="education-entry"><div><strong>Prêmio epfrogger · 2º trimestre de 2026</strong><span>Fila Webphone e automações para agilizar o atendimento e melhorar SLAs.</span></div><a class="recognition-link" href="img/efrogger%202T.jpg" target="_blank" rel="noreferrer">Ver prêmio ↗</a></div>
+            <div class="education-entry"><div><strong>Prêmio epfrogger · inovação</strong><span>Reconhecimento por aprimorar fluxos, treinamentos e comunicação com clientes.</span></div><a class="recognition-link" href="img/epfrogger.jpg" target="_blank" rel="noreferrer">Ver prêmio ↗</a></div>
+            <div class="education-entry"><div><strong>Promoção · Integração e Suporte em Redes</strong><span>Reconhecimento e novo desafio profissional na epharma.</span></div><a class="recognition-link" href="img/Promo%C3%A7%C3%A3o.jpg" target="_blank" rel="noreferrer">Ver reconhecimento ↗</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contato">
+      <div class="container">
+        <span class="section-kicker reveal">Contato</span>
+        <div class="contact-grid">
+          <div class="contact-copy reveal">
+            <h3>Disponível para <span>novos desafios.</span></h3>
+            <p>Aberto a oportunidades em tecnologia, suporte, implantação e integração de sistemas. Entre em contato pelos canais abaixo.</p>
+            <div class="contact-links">
+              <a class="button button-primary" href="mailto:guisimilopes@icloud.com">Enviar e-mail <span aria-hidden="true">↗</span></a>
+              <a class="contact-link" href="https://github.com/SimiTeste" target="_blank" rel="noreferrer">GitHub ↗</a>
+              <a class="contact-link" href="https://www.linkedin.com/in/guilhermesimilopes/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="footer-copy">© 2026 Guilherme Simi Lopes. Desenvolvido com foco em performance e código limpo.</span>
+      <a class="footer-top" href="#inicio">VOLTAR AO TOPO ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.querySelector(".site-header");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".nav-links");
+    const navLinks = [...document.querySelectorAll(".nav-links a")];
+    const sections = [...document.querySelectorAll("main section[id]")];
+
+    const updateHeader = () => header.classList.toggle("scrolled", window.scrollY > 12);
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Abrir menu" : "Fechar menu");
+      nav.classList.toggle("open", !isOpen);
+      document.body.classList.toggle("menu-open", !isOpen);
+    });
+
+    const closeMenu = () => {
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Abrir menu");
+      nav.classList.remove("open");
+      document.body.classList.remove("menu-open");
+    };
+    navLinks.forEach((link) => link.addEventListener("click", closeMenu));
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
+        });
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    sections.forEach((section) => sectionObserver.observe(section));
+
+  </script>
+</body>
+</html>
